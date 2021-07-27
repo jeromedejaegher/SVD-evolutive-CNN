@@ -10,7 +10,7 @@ Given a general network architecture, it optimizes layers-width during training,
 Thus, it enables a re-use of weights of a previously trained network, saving time and energy-consumption.
 
 ## Results :
-Tested on the MNIST datasets, gives a 98,5% accuracy with a light 6-layers ResNet, with only 12.5k params (starting from 2M params).
+Tested on the MNIST datasets, gives a 98,5% accuracy with a light 6-layers ResNet, with only 12.5k params (starting from 2M params). This reduction can be reached within hours, without loss of stability (on this easy dataset).
 
 ## Directions to improve the model : 
 - On Residual Blocks, perform svd on Id + AB instead of A and B
