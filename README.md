@@ -3,7 +3,7 @@
 Toy example of a tool to optimize CNN layers widths, according their singular values decomposition (SVD).
 
 ## Idea and principle
-Given a NN structure, the tool performs a SVD decompozition, pruns low-energy/low variance dims, and adds new dims based on the energy distribution of the singular vectors.
+Given a NN structure, the tool performs a SVD decomposition, pruns low-energy/low variance dims, and adds new dims based on the energy distribution of the singular vectors.
 
 ## Usage :
 Given a general network architecture, it optimizes layers-width during training, enabling to use networks weights from a step to the other.
