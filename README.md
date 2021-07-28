@@ -17,7 +17,7 @@ Formally, given a layer l, an input X, an output Y and a transformation Φ : X -
 
 A = U @ Σ @ V.T, where U and V are unitary (U @ U.T = U.T @ U = Id).
 
-If A is in R^{d<sub>{out} x d<sub>{in})
+If A is in R<sup>d<sub>out<\sub> x d<sub>in<\sub><\sup>
 
 
 
