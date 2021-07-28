@@ -5,7 +5,7 @@ Toy example of a tool to optimize neural network layers widths, according their 
 
 Layers considered : convolution, dense, Residual Block.
 
-This tool can surely be extended to transformers, as a generalization of [Collaborative Attention]((https://arxiv.org/abs/2006.16362))
+This tool can surely be extended to transformers, as a generalization of [Collaborative Attention](https://arxiv.org/abs/2006.16362)
 
 
 ## Idea and principle
