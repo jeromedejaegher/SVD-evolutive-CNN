@@ -4,14 +4,15 @@
 Toy example of a tool to optimize neural network layers widths, according their singular values decomposition (SVD).
 
 Layers considered : convolution, dense, Residual Block.
-This tool can be extended to 
+
+This tool can surely be extended to transformers, as a generalization of [Collaborative Attention]((https://arxiv.org/abs/2006.16362))
 
 
 ## Idea and principle
 Given a neural network structure, the tool performs a SVD decomposition on each layer weight.
 On the singular values diagonal matrix S :
 - the tool pruns lowest (low-energy/low variance) values, and pruns dims along the corresponding vectors on matrix U and V.T, and 
-- adds new dims on layer where S have high-energy values, orthogonal from existing sigular vectors.
+- adds new dims on layer where S have high-energy values, orthogonal from existing singular vectors.
 
 Formally, given a layer l, an input X, an output Y and a transformation Φ : X -> y = σ (A @ X +b) on this layer, the SVD transform the matrix A as :
 
@@ -48,3 +49,6 @@ Huanrui Yang, Minxue Tang, Wei Wen, Feng Yan, Daniel Hu, Ang Li, Hai Li, Yiran C
 
 - [Spectral Pruning: Compressing Deep Neural Networks via Spectral Analysis and its Generalization Error
 Taiji Suzuki, Hiroshi Abe, Tomoya Murata, Shingo Horiuchi, Kotaro Ito, Tokuma Wachi, So Hirai, Masatoshi Yukishima, Tomoaki Nishimura](https://arxiv.org/abs/1808.08558)
+
+- [Multi-Head Attention: Collaborate Instead of Concatenate 
+Jean-Baptiste Cordonnier, Andreas Loukas, Martin Jaggi](https://arxiv.org/abs/2006.16362)
