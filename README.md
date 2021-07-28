@@ -13,8 +13,9 @@ Given a general network architecture, it optimizes layers-width during training,
 Thus, it enables a **re-use of weights of a previously trained network, saving time and energy-consumption**.
 
 ## Results :
-Tested on the MNIST datasets, gives a **98,5% accuracy** with a light 6-layers ResNet, with only **12.5k params** (starting from 2M params). This reduction can be reached within hours, **without loss of stability** (on this easy dataset).
-Tested on the MNIST datasets, gives a **90 % accuracy** with a light 6-layers ResNet, with **250k params** (starting from ~500k params). This reduction can be reached within hours, **without loss of stability**. Given the longest training time, a more dynamic optimizing strategy (more than one dim at a time) would be a better option
+Tested on the MNIST datasets, gives a **98,5% accuracy** with a light 6-layers ResNet, with only **12.5k params** (starting from 2M params). This reduction can be reached within an hour on domestic GPU, **automatically and without loss of stability** (on this easy dataset).
+
+Tested on the MNIST datasets, gives a **90 % accuracy** with a light 6-layers ResNet, with **250k params** (starting from ~500k params). This reduction can be reached within an hour on domestic GPU, **automatically and without loss of stability**. Given the longest training time, a more dynamic optimizing strategy (more than one dim at a time) would be a better option to avoid overfitting.
 
 ## Directions to improve the model : 
 - On Residual Blocks, perform svd on Id + AB instead of A and B
@@ -23,5 +24,10 @@ Tested on the MNIST datasets, gives a **90 % accuracy** with a light 6-layers Re
 
 
 ## Related works : 
-[Learning Low-rank Deep Neural Networks via Singular Vector Orthogonality Regularization and Singular Value Sparsification
+During my search on related works, I found these articles about neural networks and SVD.
+
+- [Learning Low-rank Deep Neural Networks via Singular Vector Orthogonality Regularization and Singular Value Sparsification
 Huanrui Yang, Minxue Tang, Wei Wen, Feng Yan, Daniel Hu, Ang Li, Hai Li, Yiran Chen](https://arxiv.org/abs/2004.09031)
+
+- [Spectral Pruning: Compressing Deep Neural Networks via Spectral Analysis and its Generalization Error
+Taiji Suzuki, Hiroshi Abe, Tomoya Murata, Shingo Horiuchi, Kotaro Ito, Tokuma Wachi, So Hirai, Masatoshi Yukishima, Tomoaki Nishimura](https://arxiv.org/abs/1808.08558)
