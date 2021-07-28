@@ -16,7 +16,8 @@ On the singular values diagonal matrix S :
 Formally, given a layer l, an input X, an output Y and a transformation Φ : X -> y = σ (AX +b) on this layer, the SVD transform the matrix A as :
 
 A = U @ Σ @ V.T, where U and V are unitary (U @ U.T = U.T @ U = Id).
-If A is in R^{d_out x d_in)
+
+If A is in R^{d_{out} x d_{in})
 
 
 
