@@ -13,11 +13,12 @@ On the singular values diagonal matrix S :
 - the tool pruns lowest (low-energy/low variance) values, and pruns dims along the corresponding vectors on matrix U and V.T, and 
 - adds new dims on layer where S have high-energy values, orthogonal from existing sigular vectors.
 
-Formally, given a layer l, an input X, an output Y and a transformation Φ : X -> y = σ (AX +b) on this layer, the SVD transform the matrix A as :
+Formally, given a layer l, an input X, an output Y and a transformation Φ : X -> y = σ (A @ X +b) on this layer, the SVD transform the matrix A as :
 
 A = U @ Σ @ V.T, where U and V are unitary (U @ U.T = U.T @ U = Id).
 
-If A is in R<sup>d<sub>out<\sub> x d<sub>in<\sub><\sup>
+If A is in R<sup>d<sub>out</sub> x d<sub>in</sub></sup>, and d<sub>out</sub> < d<sub>in</sub>, then &Sigma; is in R<sup> x d<sub>out</sub>.
+  
 
 
 
