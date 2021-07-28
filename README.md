@@ -1,6 +1,9 @@
 # SVD-evolutive-CNN
 (Pytorch implementation)
+
 Toy example of a tool to optimize CNN layers widths, according their singular values decomposition (SVD).
+
+Layers considered : convolution, dense, Residual Block.
 
 ## Idea and principle
 Given a NN structure, the tool performs a SVD decomposition on each layer weight.
