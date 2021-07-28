@@ -15,15 +15,18 @@ On the singular values diagonal matrix S :
 
 Formally, given a layer l, an input X, an output Y and a transformation Φ : X -> y = σ (A @ X +b) on this layer, the SVD transform the matrix A as :
 
-A = U @ Σ @ V.T, where U and V are unitary (U @ U.T = U.T @ U = Id).
+A = U @ Σ @ V.T, where U and V are unitary (U @ U.T = U.T @ U = Id) and and &Sigma; is diagonal.
 
-If A is in R<sup>d<sub>out</sub> x d<sub>in</sub></sup>, and d<sub>out</sub> < d<sub>in</sub>, then &Sigma; is in R<sup> x d<sub>out</sub>.
-  
+If A is in R<sup>d<sub>out</sub> x d<sub>in</sub></sup>, and d<sub>out</sub> < d<sub>in</sub>, then &Sigma; is in R<sup> d<sub>out</sub>x d<sub>out</sub> </sup> .
 
+We class the values of &Sigma; in decreasing order. Replacing the last one by 0 define an approximate matrix &Sigma; <sub>d<sub>out</sub> - 1</sub> and 
 
+A = U<sub>d<sub>out</sub> - 1</sub> @ Σ<sub>d<sub>out</sub> - 1</sub> @ V<sub>d<sub>out</sub> - 1, d<sub>in</sub> - 1</sub>.T is the projection of &Phi; (x) on this new output space. We use this new output space as the input space of the next layer, setting A(l+1) = A<sub>d<sub>out(l)</sub> - 1</sub>, thus reducing the size of the 2 layers and the total number of parameters of the networks.
+
+Symetrically, on layers where singular values are high, we can expand the output space R<sup>d<sub>out</sub></sup> -> R<sup>d<sub>out</sub> + 1</sup>, allowing the neural network to find new relevant features to improve its overall accuracy.
 
 ## Usage :
-Given a general network architecture, it optimizes layers-width during training, enabling to use networks weights from a step to the other.
+Given a general network architecture, it optimizes layers-width **during training**, enabling to use networks weights from a step to the other.
 Thus, it enables a **re-use of weights of a previously trained network, saving time and energy-consumption**.
 
 ## Results :
