@@ -13,7 +13,7 @@ On the singular values diagonal matrix S :
 - the tool pruns lowest (low-energy/low variance) values, and pruns dims along the corresponding vectors on matrix U and V.T, and 
 - adds new dims on layer where S have high-energy values, orthogonal from existing sigular vectors.
 
-Formally, given a layer l, an input X, an output Y and a transformation \Phi : X -> y = \sigma (AX +b) on this layer, the SVD transform the matrix A as :
+Formally, given a layer l, an input X, an output Y and a transformation &Phi : X -> y = &sigma (AX +b) on this layer, the SVD transform the matrix A as :
 
 
 
