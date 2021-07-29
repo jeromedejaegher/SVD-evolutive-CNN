@@ -37,9 +37,9 @@ Given a general network architecture, it optimizes layers-width **during trainin
 Thus, it enables a **re-use of weights of a previously trained network, saving time and energy-consumption**.
 
 ## Results :
-Tested on the MNIST datasets, gives a **98,5% accuracy** with a light 6-layers ResNet, with only **12.5k params** (starting from 2M params). This reduction can be reached within an hour on domestic GPU, **automatically and without loss of stability** (on this easy dataset).
+Tested on the MNIST datasets, gives a **98,5% accuracy** with a light 6-layers ResNet, with only **15k params** (starting from 2M params). This reduction can be reached within an hour on domestic GPU, **automatically and without loss of stability** (on this easy dataset). Approx. 50 automatic optimization steps to reduce the network by 99% without loss in accuracy.
 
-Tested on the MNIST datasets, gives a **90 % accuracy** with a light 6-layers ResNet, with **250k params** (starting from ~500k params). This reduction can be reached within an hour on domestic GPU, **automatically and without loss of stability**. Given the longest training time, a more dynamic optimizing strategy (more than one dim at a time) would be a better option to avoid overfitting.
+Tested on the Fashion-MNIST datasets, gives a **90 % accuracy** with a light 6-layers ResNet, with **350k params** (starting from ~500k params). This reduction can be reached within an hour on domestic GPU, **automatically and without loss of stability**. 
 
 ## Directions to improve the model : 
 - On Residual Blocks, perform svd on Id + AB instead of A and B
