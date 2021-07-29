@@ -1,9 +1,10 @@
 # SVD-evolutive-CNN
 (Pytorch implementation)
 
-Toy example of a tool to optimize neural network layers widths, according their singular values decomposition (SVD).
+Toy example of a tool to optimize neural network layers widths during training, according their singular values decomposition (SVD).
+The neural network grows if the task is too difficult for the current structure, and shrinks if it is overparametrized for the task.
 
-Layers considered : convolution, dense, Residual Block.
+*Layers considered : convolution, dense, Residual Block.*
 
 This tool can surely be extended to transformers, as a generalization of [Collaborative Attention](https://arxiv.org/abs/2006.16362)
 
@@ -21,9 +22,13 @@ A = U @ Σ @ V.T, where U and V are unitary (U @ U.T = U.T @ U = Id) and and &Si
 
 If A is in R<sup>d<sub>out</sub> x d<sub>in</sub></sup>, and d<sub>out</sub> < d<sub>in</sub>, then &Sigma; is in R<sup> d<sub>out</sub>x d<sub>out</sub> </sup> .
 
-We class the values of &Sigma; in decreasing order. Replacing the last one by 0 define an approximate matrix &Sigma; <sub>d<sub>out</sub> - 1</sub> and 
+We class the values of &Sigma; in decreasing order. Replacing the last one by 0 define an approximate matrix &Sigma; <sub>d<sub>out</sub> - 1</sub> .
 
-A = U<sub>d<sub>out</sub> - 1</sub> @ Σ<sub>d<sub>out</sub> - 1</sub> @ V<sub>d<sub>out</sub> - 1, d<sub>in</sub> - 1</sub>.T is the projection of &Phi; (x) on this new output space. We use this new output space as the input space of the next layer, setting A(l+1) = A<sub>d<sub>out(l)</sub> - 1</sub>, thus reducing the size of the 2 layers and the total number of parameters of the networks.
+The difference is bounded and small, and project A on a subspace of dimension d<sub>out(l)</sub> - 1</sub>. Moreover, the projection of this approximation on the first d<sub>out(l)</sub> - 1</sub> dimensions is also of dimension d<sub>out(l)</sub> - 1</sub>.
+Thus, without loss of the interpretation power of the neural network, we can restrict the output of this layer in dimension d<sub>out(l)</sub> - 1</sub>, and thus reduce the number of parameters.
+
+Now, A = U<sub>d<sub>out</sub> - 1</sub> @ Σ<sub>d<sub>out</sub> - 1</sub> @ V<sub>d<sub>out</sub> - 1, d<sub>in</sub> - 1</sub>.T is the new &Phi; (x) on this new output space. 
+ We use this new output space as the input space of the next layer, setting A(l+1) = A<sub>d<sub>out(l)</sub> - 1</sub>, d<sub>out(l + 1)</sub></sub> thus reducing the size of the 2 layers and the total number of parameters of the networks.
 
 Symetrically, on layers where singular values are high, we can expand the output space R<sup>d<sub>out</sub></sup> -> R<sup>d<sub>out</sub> + 1</sup>, allowing the neural network to find new relevant features to improve its overall accuracy.
 
@@ -54,3 +59,9 @@ Taiji Suzuki, Hiroshi Abe, Tomoya Murata, Shingo Horiuchi, Kotaro Ito, Tokuma Wa
 And this hint that Transformers too can be compressed efficiently :
 - [Multi-Head Attention: Collaborate Instead of Concatenate 
 Jean-Baptiste Cordonnier, Andreas Loukas, Martin Jaggi](https://arxiv.org/abs/2006.16362)
+
+## To re-use this work :
+
+Please notice your interest through the "issues" on this repository, follow the rules of the given Licence and cite me as author as :
+
+_Jérome Dejaegher, SVD evolutive CNN, published the 29/07/2021 on GitHub_
