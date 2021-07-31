@@ -44,7 +44,7 @@ Symetrically, on layers where singular values are high, we can expand the output
 ## Directions to improve the model : 
 - On Residual Blocks, perform svd on Id + AB instead of A and B
 - The "optimize layers" util can be split in two : one utils to manage layers enlargment or layers shrinking, and another tool which layers to enlarge or to shrinking, given a constraint (GPU memory...). The "optimize layers" util has a step of 1, but this can be changed also.
-- On following layer, equations suggest to calculate Vh like this : ![next_layer_shrinking_equations](./img/Eqn4 - next layer approx.svg). To be tested...
+- On following layer, equations suggest to calculate Vh like this : ![next_layer_shrinking_equations](img/Eqn4 - next layer approx.svg). To be tested...
 - Proto, needs quite a lot of work to industrialize ;)
 
 
