@@ -8,6 +8,14 @@ The neural network grows if the task is too difficult for the current structure,
 
 This tool can surely be extended to transformers, as a generalization of [Collaborative Attention](https://arxiv.org/abs/2006.16362)
 
+## Usage :
+Given a general network architecture, it optimizes (=modifies) layers-width **during training, without loss of accuracy**, enabling to use networks weights from a step to the other.
+Thus, it enables a **re-use of weights of a previously trained network, saving time and energy-consumption**.
+
+## Results :
+Tested on the MNIST datasets, gives a **98,5% accuracy** with a light 6-layers ResNet, with only **15k params** (starting from 2M params). This reduction can be reached within an hour on domestic GPU, **automatically and without loss of stability** (on this easy dataset). Approx. 50 automatic optimization steps to reduce the network by 99% without loss in accuracy.
+
+Tested on the Fashion-MNIST datasets, gives a **90 % accuracy** with a light 6-layers ResNet, with **350k params** (starting from ~500k params). This reduction can be reached within an hour on domestic GPU, **automatically and without loss of stability**. 
 
 ## Idea and principle
 Given a neural network structure, the tool performs a SVD decomposition on each layer weight.
@@ -32,14 +40,6 @@ Now, A = U<sub>d<sub>out</sub> - 1</sub> @ Σ<sub>d<sub>out</sub> - 1</sub> @ V<
 
 Symetrically, on layers where singular values are high, we can expand the output space R<sup>d<sub>out</sub></sup> -> R<sup>d<sub>out</sub> + 1</sup>, allowing the neural network to find new relevant features to improve its overall accuracy.
 
-## Usage :
-Given a general network architecture, it optimizes layers-width **during training**, enabling to use networks weights from a step to the other.
-Thus, it enables a **re-use of weights of a previously trained network, saving time and energy-consumption**.
-
-## Results :
-Tested on the MNIST datasets, gives a **98,5% accuracy** with a light 6-layers ResNet, with only **15k params** (starting from 2M params). This reduction can be reached within an hour on domestic GPU, **automatically and without loss of stability** (on this easy dataset). Approx. 50 automatic optimization steps to reduce the network by 99% without loss in accuracy.
-
-Tested on the Fashion-MNIST datasets, gives a **90 % accuracy** with a light 6-layers ResNet, with **350k params** (starting from ~500k params). This reduction can be reached within an hour on domestic GPU, **automatically and without loss of stability**. 
 
 ## Directions to improve the model : 
 - On Residual Blocks, perform svd on Id + AB instead of A and B
