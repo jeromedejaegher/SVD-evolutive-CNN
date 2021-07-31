@@ -47,6 +47,7 @@ Symetrically, on layers where singular values are high, we can expand the output
 - On following layer, equations suggest to calculate Vh like this : 
  
 ![next_layer_shrinking_equations](img/Eqn4_next_layer_approx.svg). 
+
 To be tested...
 - Proto, needs quite a lot of work to industrialize ;)
 
