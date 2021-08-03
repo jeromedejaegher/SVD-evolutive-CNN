@@ -1,5 +1,5 @@
 # SVD-evolutive-CNN
-(Pytorch implementation)
+(Pytorch implementation, done in July 2021)
 
 Toy example of a tool to **optimize neural network layers dimensions during training**, according their singular values decomposition (SVD).
 The neural network grows if the task is too difficult for the current structure, and shrinks if it is overparametrized for the task.
