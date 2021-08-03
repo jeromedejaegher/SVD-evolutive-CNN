@@ -51,7 +51,7 @@ Regarding bias, they are computed as the vector that minimizes :
 Symetrically, on layers where singular values are high, we can expand the output space R<sup>d<sub>out</sub></sup> -> R<sup>d<sub>out</sub> + 1</sup> with vectors orthogonal to the original output space, allowing the neural network to find new relevant features to improve its overall accuracy.
 
 
-## Experimental findings to be tested : 
+## Experimental findings to be explained : 
 - in Resnet Blocks, the intermediate channel size seems to converge to a size significantly (around 3 times) smaller than input and output sizes. As if the Neural Network distillate channel information throught space, and re-channelize it before performing the addition with the (space-oriented) residue branch
 
 
