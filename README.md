@@ -1,7 +1,7 @@
 # SVD-evolutive-CNN
 (Pytorch implementation)
 
-Toy example of a tool to optimize neural network layers widths during training, according their singular values decomposition (SVD).
+Toy example of a tool to **optimize neural network layers dimensions during training**, according their singular values decomposition (SVD).
 The neural network grows if the task is too difficult for the current structure, and shrinks if it is overparametrized for the task.
 
 *Layers considered : convolution, dense, Residual Block.*
@@ -13,9 +13,11 @@ Given a general network architecture, it optimizes (=modifies) layers-width **du
 Thus, it enables a **re-use of weights of a previously trained network, saving time and energy-consumption**.
 
 ## Results :
-Tested on the MNIST datasets, gives a **98,5% accuracy** with a light 6-layers ResNet, with only **15k params** (starting from 2M params). This reduction can be reached within an hour on domestic GPU, **automatically and without loss of stability** (on this easy dataset). Approx. 50 automatic optimization steps to reduce the network by 99% without loss in accuracy.
+Tested on the MNIST dataset, gives a **98,5% accuracy** with a light 6-layers ResNet, with only **15k params** (starting from 2M params). This reduction can be reached within an hour on domestic GPU, **automatically and without loss of stability** (on this easy dataset). Approx. 50 automatic optimization steps to reduce the network by 99% without loss in accuracy.
 
-Tested on the Fashion-MNIST datasets, gives a **90 % accuracy** with a light 6-layers ResNet, with **350k params** (starting from ~500k params). This reduction can be reached within an hour on domestic GPU, **automatically and without loss of stability**. 
+Tested on the Fashion-MNIST dataset, gives a **90 % accuracy** with a light 6-layers ResNet, with **350k params** (starting from ~500k params). This reduction can be reached within an hour on domestic GPU, **automatically and without loss of stability**. 
+
+Tested on the CIFAR-10 dataset, gives a **92% accuracy on train set with 2M parameters** with a 9 layers ResNet, wich is far too deep for a 32x32 images set. The test accuracy is not that good, around 75%, but I guess it is because the learning rate is not fine-tuned and data are not augmented.
 
 ## Idea and principle
 Given a neural network structure, the tool performs a SVD decomposition on each layer weight.
@@ -37,18 +39,26 @@ Thus, without loss of the interpretation power of the neural network, we can res
 
 Now, A = U<sub>d<sub>out</sub> - 1</sub> @ Σ<sub>d<sub>out</sub> - 1</sub> @ V<sub>d<sub>out</sub> - 1, d<sub>in</sub></sub>.T is the new &Phi; (x) on this new output space. 
  We use this new output space as the input space of the next layer, setting A(l+1) = A<sub>d<sub>out(l)</sub> - 1</sub>, d<sub>out(l + 1)</sub></sub> thus reducing the size of the 2 layers and the total number of parameters of the networks.
+ 
+On following layer, the reducted weights are calculated like this : 
+ 
+![next_layer_shrinking_equations](img/Eqn4_next_layer_approx.svg). 
 
-Symetrically, on layers where singular values are high, we can expand the output space R<sup>d<sub>out</sub></sup> -> R<sup>d<sub>out</sub> + 1</sup>, allowing the neural network to find new relevant features to improve its overall accuracy.
+Regarding bias, they are computed as the vector that minimizes :
+
+![bias_approx_equations](img/Eqn5_bias_approx.svg). 
+
+Symetrically, on layers where singular values are high, we can expand the output space R<sup>d<sub>out</sub></sup> -> R<sup>d<sub>out</sub> + 1</sup> with vectors orthogonal to the original output space, allowing the neural network to find new relevant features to improve its overall accuracy.
+
+
+## Experimental findings to be tested : 
+- in Resnet Blocks, the intermediate channel size seems to converge to a size significantly (around 3 times) smaller than input and output sizes. As if the Neural Network distillate channel information throught space, and re-channelize it before performing the addition with the (space-oriented) residue branch
 
 
 ## Directions to improve the model : 
 - On Residual Blocks, perform svd on Id + AB instead of A and B
-- The "optimize layers" util can be split in two : one utils to manage layers enlargment or layers shrinking, and another tool which layers to enlarge or to shrinking, given a constraint (GPU memory...). The "optimize layers" util has a step of 1, but this can be changed also.
-- On following layer, equations suggest to calculate Vh like this : 
- 
-![next_layer_shrinking_equations](img/Eqn4_next_layer_approx.svg). 
-
-To be tested...
+- The "optimize layers" util can be split in two : one utils to manage layers enlargment or layers shrinking, and another tool which layers to enlarge or to shrinking, given a constraint (GPU memory...). 
+- To be tested with transformers, batchnorm, separable convolutions...
 - Proto, needs quite a lot of work to industrialize ;)
 
 
