@@ -17,7 +17,7 @@ Tested on the MNIST dataset, gives a **98,5% accuracy** with a light 6-layers Re
 
 Tested on the Fashion-MNIST dataset, gives a **90 % accuracy** with a light 6-layers ResNet, with **350k params** (starting from ~500k params). This reduction can be reached within an hour on domestic GPU, **automatically and without loss of stability**. 
 
-Tested on the CIFAR-10 dataset, gives a **92% accuracy on train set with 2M parameters** with a 9 layers ResNet, wich is far too deep for a 32x32 images set. The test accuracy is not that good, around 75%, but I guess it is because the learning rate is not fine-tuned and data are not augmented.
+Tested on the CIFAR-10 dataset, gives a **92% accuracy on train set with 2M parameters** with a 9 layers ResNet, wich is far too deep for a 32x32 images set. The test accuracy is not that good, around 75%, but I guess it is because the model has no batch norm, the learning rate is not fine-tuned and data is not augmented.
 
 ## Idea and principle
 Given a neural network structure, the tool performs a SVD decomposition on each layer weight.
