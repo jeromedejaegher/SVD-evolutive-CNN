@@ -18,6 +18,8 @@ Tested on the MNIST dataset, gives a **98,5% accuracy** with a light 6-layers Re
 Tested on the Fashion-MNIST dataset, gives a **90 % accuracy** with a light 6-layers ResNet, with **350k params** (starting from ~500k params). This reduction can be reached within an hour on domestic GPU, **automatically and without loss of stability**. 
 
 Tested on the CIFAR-10 dataset, gives a **92% accuracy on train set with 2M parameters** with a 9 layers ResNet, wich is far too deep for a 32x32 images set. The test accuracy is not that good, around 75%, but I guess it is because the model has no batch norm, the learning rate is not fine-tuned and data is not augmented.
+EDIT 1 : With basic data augmentation, the test accuracy increases to 85%
+EDIT 2 : Applying SVD reduction to Id + AB on each resblock makes larger model. The work is still in progress, maybe thresholds for pruning or expanding the network are too low ?
 
 ## Idea and principle
 Given a neural network structure, the tool performs a SVD decomposition on each layer weight.
@@ -56,10 +58,10 @@ Symetrically, on layers where singular values are high, we can expand the output
 
 
 ## Directions to improve the model : 
-- On Residual Blocks, perform svd on Id + AB instead of A and B
 - The "optimize layers" util can be split in two : one utils to manage layers enlargment or layers shrinking, and another tool which layers to enlarge or to shrinking, given a constraint (GPU memory...). 
 - To be tested with transformers, batchnorm, separable convolutions...
-- Proto, needs quite a lot of work to industrialize ;)
+- On ResBlock, my current intuition is that singular values of (Id + A @ B) indicates optimal width of layers, and singular values of A and B indicates optimal depth of the network. To be investigated...
+- - Proto, needs quite a lot of work to industrialize ;)
 
 
 ## Related works : 
